@@ -6,7 +6,7 @@
 /*   By: ebeiline <ebeiline@42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:42:38 by ebeiline          #+#    #+#             */
-/*   Updated: 2022/01/03 15:54:16 by ebeiline         ###   ########.fr       */
+/*   Updated: 2022/01/03 19:28:41 by ebeiline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ void	var_init(t_vars *vars)
 	vars->game.c_collec = 0;
 	vars->game.c_player = 0;
 	vars->game.c_exits = 0;
+	vars->game.pos.y = 0;
+	vars->game.pos.x = 0;
 }
 
-void check_format(int argc, char **argv)
+void	check_format(int argc, char **argv)
 {
 	if (argc < 2)
 	{
@@ -66,7 +68,7 @@ void	get_coords(t_vars *vars, char **argv)
 	close(fd);
 }
 
-void get_map(t_vars *vars, char **argv)
+void	get_map(t_vars *vars, char **argv)
 {
 	int		row;
 	int		fd;
@@ -83,7 +85,7 @@ void get_map(t_vars *vars, char **argv)
 	while (get_next_line(fd, &vars->map.mtx[row]))
 		row++;
 	close(fd);
-	checkmap(*vars);
+	checkmap(vars);
 }
 
 int	main(int argc, char **argv)
@@ -95,9 +97,10 @@ int	main(int argc, char **argv)
 	get_coords(&vars, argv);
 	get_map(&vars, argv);
 	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1280, 800, "ebeiline so_long");
+	vars.win = mlx_new_window(vars.mlx, vars.map.size.x * 64,
+			vars.map.size.y * 64, "ebeiline so_long");
 	loadmap(vars);
-	mlx_hook(vars.win, 17, 1L << 0, close_game, &vars);
-	mlx_hook(vars.win, 2, 1L << 0, move_player, &vars);
+	mlx_hook(vars.win, 17, 0, close_game, &vars);
+	mlx_hook(vars.win, 2, 0, move_player, &vars);
 	mlx_loop(vars.mlx);
 }

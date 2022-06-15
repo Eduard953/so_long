@@ -6,17 +6,17 @@
 /*   By: ebeiline <ebeiline@42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 16:26:08 by ebeiline          #+#    #+#             */
-/*   Updated: 2022/01/02 15:55:19 by ebeiline         ###   ########.fr       */
+/*   Updated: 2022/01/03 19:34:36 by ebeiline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include "mlx/mlx.h"
-#include "libft/libft.h"
-#include <fcntl.h>
-#include <stdio.h>
+# include "mlx/mlx.h"
+# include "libft/libft.h"
+# include <fcntl.h>
+# include <stdio.h>
 
 typedef struct s_coord
 {
@@ -24,14 +24,14 @@ typedef struct s_coord
 	int	y;
 }	t_coord;
 
-typedef struct	s_img {
+typedef struct s_img
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
 	t_coord	size;
-	t_coord	pos;
 }				t_img;
 
 typedef struct s_game
@@ -40,6 +40,7 @@ typedef struct s_game
 	int			c_steps;
 	int			c_player;
 	int			c_exits;
+	t_coord		pos;
 }	t_game;
 
 typedef struct s_map
@@ -58,9 +59,10 @@ typedef struct s_vars
 }	t_vars;
 
 int		move_player(int key, t_vars *vars);
-void	checkmap(t_vars vars);
+void	checkmap(t_vars *vars);
 void	loadmap(t_vars vars);
 void	win_game(t_vars *vars);
 int		close_game(t_vars *vars);
+void	err_func(char *str);
 
 #endif

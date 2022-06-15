@@ -6,11 +6,17 @@
 /*   By: ebeiline <ebeiline@42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 17:02:25 by ebeiline          #+#    #+#             */
-/*   Updated: 2022/01/03 15:58:02 by ebeiline         ###   ########.fr       */
+/*   Updated: 2022/01/03 19:35:36 by ebeiline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	err_func(char *str)
+{
+	printf("\e[31m\e[1mError\n%s \e[0m \n", str);
+	exit (EXIT_FAILURE);
+}
 
 int	end_game(t_vars *vars)
 {
@@ -23,13 +29,8 @@ int	end_game(t_vars *vars)
 	{
 		free(vars->map.mtx[i]);
 		i++;
-		printf("%d\n", vars->map.size.y);
 	}
-	printf("AAAA");
-	write(1, "33333", 1);
 	free(vars->map.mtx);
-	printf("BBBB");
-	write(1, "5444", 1);
 	return (0);
 }
 
@@ -37,12 +38,13 @@ void	win_game(t_vars *vars)
 {
 	write(1, "W!: COngrAtUlAtIOns", 20);
 	end_game(vars);
+	exit(EXIT_SUCCESS);
 }
 
 int	close_game(t_vars *vars)
 {
 	write(1, "Game aborted", 13);
 	end_game(vars);
-	printf("works");
+	exit(EXIT_SUCCESS);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ebeiline <ebeiline@42wolfsburg.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:05:10 by ebeiline          #+#    #+#             */
-/*   Updated: 2022/01/03 15:27:52 by ebeiline         ###   ########.fr       */
+/*   Updated: 2022/01/03 19:27:00 by ebeiline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	load_floor(t_vars vars, int i, int j)
 {
 	vars.img.img = mlx_xpm_file_to_image(vars.mlx, "./img/floor.xpm",
-				&vars.img.size.x, &vars.img.size.y);
-	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 64 * i, 64 * j);
+			&vars.img.size.x, &vars.img.size.y);
+	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 64 * j, 64 * i);
 	mlx_destroy_image(vars.mlx, vars.img.img);
 }
 
@@ -43,7 +43,7 @@ void	choose_tile(t_vars vars, int i, int j)
 		vars.img.img = mlx_xpm_file_to_image(vars.mlx, "./img/collectible.xpm",
 				&vars.img.size.x, &vars.img.size.y);
 	}
-	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 64 * i, 64 * j);
+	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 64 * j, 64 * i);
 	mlx_destroy_image(vars.mlx, vars.img.img);
 }
 
